@@ -1,0 +1,89 @@
+.header{
+	height: 150px;
+	width: 100%;
+	background-color: #1F2232;
+	padding-left: 10px;
+	padding-top: 20px;
+	border-bottom: 2px solid #4392F1;
+}
+.main{
+	background-image: linear-gradient(#1F2232, #2C5784);
+	padding: 20px;
+	color: #C5D1EB;
+	min-height: 700px;
+}
+.login{
+	margin: 0 auto;
+	width: 25%;
+	text-align: right;
+	margin-top: 100px;
+	border: 2px solid #1F2232;
+	padding: 10px;
+	background-color: #C5D1EB;
+	color: #2C5784;
+}
+.login h3{
+	text-align: left;
+	margin-top: 0px;
+}
+.chatwindow{
+	height: 500px;
+	width: 600px;
+	background-color: #1F2232;
+	display: inline-block; 
+	vertical-align: top;
+	margin-left: 40px;
+	padding: 20px;
+	color: #2C5784;
+}
+.chatboard{
+	height: 400px;
+	width: 560px;
+	background-color: #C5D1EB;
+	margin-bottom: 5px;
+	padding: 20px;
+	overflow: scroll;
+}
+.chatinput{
+	height: 50px;
+	width: 560px;
+	background-color: #C5D1EB;
+	padding-left: 5px;
+	padding-top: 5px;
+}
+.chatinput input{
+	width: 480px;
+	height: 40px;
+}
+.left{
+	display: inline-block;
+}
+.voteboard{
+	height: 320px;
+	width: 480px;
+	background-color: #1F2232;
+	padding: 10px;
+	color: #4392F1;
+
+}
+.voteboard h3{
+	margin-top: 0px;
+}
+#player{
+	margin-bottom: 10px;
+	pointer-events: none;	
+}
+.voteoptions{
+	height: 200px;
+	background-color: #C5D1EB;
+	margin-bottom: 10px;
+	color: #1F2232;
+	font-size: 9pt;
+	padding: 5px;
+	overflow: scroll;
+}
+.voteform{
+	background-color: #C5D1EB;
+	padding: 5px;
+	padding-left: 20px;
+}

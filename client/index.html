@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Beatbud</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src='app.js'></script>
+  <script src='factories/userFactory.js'></script>
+  <script src='factories/trackFactory.js'></script>
+  <script src='factories/socketFactory.js'></script>
+  <script src='controllers/loginController.js'></script>
+  <script src='controllers/registerController.js'></script>
+  <script src='controllers/dashboardController.js'></script>
+  <script src='controllers/roomController.js'></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="header">
+      <img src="/static/img/logo.png" alt="logo">
+    </div>
+    <div ng-view class="main"></div>
+  </div>
+</body>
+</html>

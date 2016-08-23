@@ -1,0 +1,12 @@
+1. Backend Log/Reg
+
+Given a req.body of {
+	first_name: "example",
+	last_name: "example",
+	email: "example",
+	password: "example"
+}
+Create a new User in database and login that user
+Validations: all fields required, name must be letters only, email must be valid email format, password greater than 8 chars
+Bcrypt password
+
