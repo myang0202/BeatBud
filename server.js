@@ -48,6 +48,7 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on("new_user", function(data){
 		users.push(data.user)
+		socket.broadcast.emit('user_join', {user: data.user})
 	})
 
     socket.on("send_message", function(data){
@@ -129,7 +130,6 @@ io.sockets.on('connection', function (socket) {
 	})
 	socket.on("change_track", function(data){
 		clearInterval(timeLoop)
-		io.emit("post_new_message", {message: "Glad you liked the song! heres the next one :)", user: {first_name: "beatbud"}})
 		var nextTrack = relatedTracks[0];
 		for(var i = 0; i < relatedTracks.length; i++){
 			if(relatedTracks[i].votes > nextTrack.votes){

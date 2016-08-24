@@ -4,7 +4,7 @@
 	background-color: #1F2232;
 	padding-left: 10px;
 	padding-top: 20px;
-	border-bottom: 2px solid #4392F1;
+	border-bottom: 1px solid #4392F1;
 }
 .main{
 	background-image: linear-gradient(#1F2232, #2C5784);
@@ -25,6 +25,10 @@
 .login h3{
 	text-align: left;
 	margin-top: 0px;
+}
+.error{
+	font-size: 8pt;
+	color: red;
 }
 .chatwindow{
 	height: 500px;
@@ -86,4 +90,5 @@
 	background-color: #C5D1EB;
 	padding: 5px;
 	padding-left: 20px;
+	color: #2C5784;
 }

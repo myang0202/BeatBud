@@ -32,10 +32,9 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 	});
 	socketFactory.on('user_join', function (data) {
 		$scope.messages.push({
-			user: 'chatroom',
-			text: 'User ' + data.name + ' has joined.'
+			user: {first_name: "beatbud"},
+			message: data.user.first_name + ' has joined the room!'
 		});
-		$scope.users.push(data.name);
 	});
 
     socketFactory.emit("get_track", {reason: "because I want the track"});
