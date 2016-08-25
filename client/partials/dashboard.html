@@ -1,5 +1,25 @@
-<h2>Welcome, {{user.first_name}}</h2>
-<a href ng-click="logout()">Logout</a>
+<!-- <a href ng-click="logout()">Logout</a> -->
+    <div class="header">
+      <img src="/static/img/logo.png" alt="logo">
+      <div class="nav">
+	      <a href="#/dashboard" class="btn btn-link">Dashboard</a>
+	      <a href="#/profile" class="btn btn-link">Profile</a>
+	      <button ng-click="logout()" class="btn btn-link">Logout</button>
+      </div>
+    </div>
 
-<button class="btn btn-default" ng-click="room()">Start Listening Now</button>
+  <div id="join">
+
+    <div class="landing">
+    	<h1>Experience music like never before</h2>
+<!--     	<img class="youtubelogo" src="../static/img/playbutton_blue.png" alt="" /> -->
+    	<button class="btn btn-primary btn-lg" ng-click="room()">Start Listening Now</button>
+    </div>
+  </div>
+<div id="introduction">
+  <img class ="small_logo" src="../static/img/logo.png" alt="" />
+  <h3>Experience music with your friends</h3>
+  <h2>Listen! Chat! Share!</h2>
+</div>
+
 

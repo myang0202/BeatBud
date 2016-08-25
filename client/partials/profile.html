@@ -1,0 +1,17 @@
+<div class="header">
+  <img src="/static/img/logo.png" alt="logo">
+  <div class="nav">
+      <a href="#/dashboard" class="btn btn-link">Dashboard</a>
+      <a href="#/profile" class="btn btn-link">Profile</a>
+      <button ng-click="logout()" class="btn btn-link">Logout</button>
+  </div>
+</div>
+<div class="profileimg">
+	<img src="../static/img/smoke.jpg" alt="smoke" />
+</div><!--
+--><div class="profileinfo">
+    <h2>Profile</h2>
+    <h4>Name : {{user.first_name}}  {{user.last_name}}</h4>
+    <h4>Email : {{user.email}}</h4>
+    <h5>Joined on: {{user.created_at | date : format}}</h5>
+	</div>

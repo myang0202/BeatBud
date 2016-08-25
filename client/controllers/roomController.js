@@ -24,6 +24,7 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 			message: $scope.newmessage,
 			user: $scope.user
 		});
+		$scope.newmessage = "";
 	}
 	socketFactory.on('post_new_message', function (message) {
 		console.log("post messages" ,message)
@@ -76,6 +77,12 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 			socketFactory.emit("nominate", {videoId: $scope.newvote.substring(index+8)})
 			$scope.newvote = ""
 		}
+	}
+	$scope.logout = function(){
+		userFactory.logout(function(data){
+			console.log("logged out!")
+			$location.url("/")
+		})
 	}
     var apikey = "AIzaSyCruLojKum0HoBDOYll_gW8D2NPSLVvHZU"
 

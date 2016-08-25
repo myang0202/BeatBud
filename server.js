@@ -78,7 +78,7 @@ io.sockets.on('connection', function (socket) {
 				    var related_tracks = JSON.parse(body).items;
 				    for(var i = 0; i < related_tracks.length; i++){
 				    	if(related_tracks[i].snippet.liveBroadcastContent == "none"){
-				    		relatedTracks.push({_id: i, title: related_tracks[i].snippet.title, description: related_tracks[i].snippet.description, votes: 0, videoId: related_tracks[i].id.videoId})
+				    		relatedTracks.push({_id: i, title: related_tracks[i].snippet.title, description: related_tracks[i].snippet.description, votes: 0, videoId: related_tracks[i].id.videoId, thumbnail: related_tracks[i].snippet.thumbnails.default.url})
 				    	}
 				    }
 				    io.emit("related_tracks", {related_tracks: relatedTracks})
@@ -117,7 +117,7 @@ io.sockets.on('connection', function (socket) {
 				res.on('end', () => {
 				    var track = JSON.parse(body).items[0];
 				    if(track.snippet.liveBroadcastContent == "none"){
-				    	relatedTracks.push({_id: relatedTracks.length, title: track.snippet.title, description: track.snippet.description, votes: 0, videoId: track.id.videoId})
+				    	relatedTracks.push({_id: relatedTracks.length, title: track.snippet.title, description: track.snippet.description, votes: 0, videoId: track.id.videoId, thumbnail: track.snippet.thumbnails.default.url})
 				    }
 				    io.emit("related_tracks", {related_tracks: relatedTracks})
 
@@ -155,7 +155,7 @@ io.sockets.on('connection', function (socket) {
 			    var related_tracks = JSON.parse(body).items;
 			    for(var i = 0; i < related_tracks.length; i++){
 			    	if(related_tracks[i].snippet.liveBroadcastContent == "none"){
-			    		relatedTracks.push({_id: i, title: related_tracks[i].snippet.title, description: related_tracks[i].snippet.description, votes: 0, videoId: related_tracks[i].id.videoId})
+			    		relatedTracks.push({_id: i, title: related_tracks[i].snippet.title, description: related_tracks[i].snippet.description, votes: 0, videoId: related_tracks[i].id.videoId, thumbnail: related_tracks[i].snippet.thumbnails.default.url})
 			    	}
 			    }
 			    io.emit("related_tracks", {related_tracks: relatedTracks})

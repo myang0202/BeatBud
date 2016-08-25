@@ -1,22 +1,38 @@
-<div class="left">
-	<div id="player"></div>
-	<div class="voteboard">
-		<h3>Vote for the next song!</h3>
-		<div class="voteoptions">
-			<div class="voteoption" ng-repeat="option in voteoptions">
-				{{option.title}} <button ng-click="vote(option.videoId)" ng-disabled="disableVote">Vote</button> {{option.votes}}
+    <div class="header">
+      <img src="/static/img/logo.png" alt="logo">
+      <div class="nav">
+	      <a href="#/dashboard" class="btn btn-link">Dashboard</a>
+	      <a href="#/profile" class="btn btn-link">Profile</a>
+	      <button ng-click="logout()" class="btn btn-link">Logout</button>
+      </div>
+    </div>
+
+<div class="wrapper">
+	<div class="left">
+		<div id="player"></div>
+		<div class="voteboard">
+			<h3>Vote for the next song!</h3>
+			<div class="voteoptions">
+				<div class="voteoption" ng-repeat="option in voteoptions">
+					<img ng-src="{{option.thumbnail}}" alt="thumb">
+					<div class="optioninfo">
+						<p>{{option.title}}</p>
+						<button ng-click="vote(option.videoId)" ng-disabled="disableVote" class="btn btn-sm btn-info">Vote</button> 
+						<span>{{option.votes}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="voteform"><input type="text" ng-model="newvote" ng-pattern="youtubeurl" placeholder=" Youtube URL here"> <button class="btn btn-info" ng-click="nominate()" ng-disabled="disableNominate">Nominate</button></div>
+		</div>
+	</div>
+	<div class="chatwindow" >
+		<div class="chatboard">
+			<div ng-repeat="message in messages">
+				<p>{{message.user.first_name}} says: {{message.message}}</p>
 			</div>
 		</div>
-		<div class="voteform">Youtube URL here: <input type="text" ng-model="newvote" ng-pattern="youtubeurl"> <button class="btn btn-info" ng-click="nominate()" ng-disabled="disableNominate">Nominate</button></div>
-	</div>
-</div>
-<div class="chatwindow" >
-	<div class="chatboard">
-		<div ng-repeat="message in messages">
-			<p>{{message.user.first_name}} says: {{message.message}}</p>
+		<div class="chatinput">
+			<input type="text" ng-model="newmessage" placeholder=" Send a message"> <button ng-click = "sendMessage()" class="btn btn-info">Send</button>
 		</div>
-	</div>
-	<div class="chatinput">
-		<input type="text" ng-model="newmessage" placeholder="Send a message"> <button ng-click = "sendMessage()" class="btn btn-info">Send</button>
 	</div>
 </div>

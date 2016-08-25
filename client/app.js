@@ -19,6 +19,10 @@ app.config(function($routeProvider) {
       templateUrl: '/partials/dashboard.html',
       controller: 'dashboardController'
     })
+    .when('/profile', {
+      templateUrl: '/partials/profile.html',
+      controller: 'profileController'
+    })
     .when('/room', {
       templateUrl: '/partials/room.html',
       controller: 'roomController'
