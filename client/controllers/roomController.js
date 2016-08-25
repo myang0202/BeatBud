@@ -16,6 +16,7 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 	$scope.messages = [];
 	$scope.disableVote = false;
 	$scope.disableNominate = false;
+	$scope.scrolledToBottom = true;
 
 	console.log("room controller loaded")
 
@@ -30,6 +31,12 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 		console.log("post messages" ,message)
 		$scope.messages.push(message);
 		console.log("client side scope message",$scope.messages);
+		var element = document.getElementById('chatboard')
+		if(element.scrollTop == element.scrollHeight - element.clientHeight){
+			$scope.scrolledToBottom = true;
+		} else {
+			$scope.scrolledToBottom = false;
+		}
 	});
 	socketFactory.on('user_join', function (data) {
 		$scope.messages.push({
@@ -37,6 +44,12 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 			message: data.user.first_name + ' has joined the room!'
 		});
 	});
+
+	socketFactory.on('permissions', function(data){
+		console.log(data)
+		$scope.disableVote = data.hasVoted
+		$scope.disableNominate = data.hasNominated
+	})
 
     socketFactory.emit("get_track", {reason: "because I want the track"});
 	socketFactory.on('current_track', function (data){
@@ -67,14 +80,14 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 	});
 	$scope.vote = function(id){
 		$scope.disableVote = true;
-		socketFactory.emit("vote", {videoId: id});
+		socketFactory.emit("vote", {videoId: id, user: $scope.user});
 	}
 	$scope.youtubeurl = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/
 	$scope.nominate = function(){
 		if($scope.youtubeurl.test($scope.newvote)){
 			$scope.disableNominate = true
 			var index = $scope.newvote.indexOf("watch?v=")
-			socketFactory.emit("nominate", {videoId: $scope.newvote.substring(index+8)})
+			socketFactory.emit("nominate", {videoId: $scope.newvote.substring(index+8), user: $scope.user})
 			$scope.newvote = ""
 		}
 	}

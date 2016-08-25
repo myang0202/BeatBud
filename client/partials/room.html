@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div class="chatwindow" >
-		<div class="chatboard">
+		<div class="chatboard" id="chatboard" ng-scroll-bottom="messages">
 			<div ng-repeat="message in messages">
 				<p>{{message.user.first_name}} says: {{message.message}}</p>
 			</div>

@@ -38,7 +38,7 @@ var io = require('socket.io').listen(server)
 
 var users = []; //This is where the server stores all the current users in the room
 var messages = [] //This is where the server stores all the current messages in the chat
-var currentTrack = "X5VJX9kYf3Q" //This is the current track being played
+var currentTrack = "irOuRCkO0nQ" //This is the current track being played
 var currentTime = 0
 var relatedTracks = [] //This is where the server stores all the related tracks to the current track
 var timeLoop;
@@ -47,7 +47,18 @@ io.sockets.on('connection', function (socket) {
 	console.log("WE ARE USING SOCKETS!");
 
 	socket.on("new_user", function(data){
-		users.push(data.user)
+		var userExists = false
+		for(var i = 0; i < users.length; i++){
+			if(users[i].user.email == data.user.email){
+				userExists = true
+				socket.emit('permissions', {hasVoted: users[i].hasVoted, hasNominated: users[i].hasNominated})
+			}
+		}
+		if(!userExists){
+			users.push({user: data.user, hasVoted: false, hasNominated: false})
+			socket.emit('permissions', {hasVoted: false, hasNominated: false})
+		}
+		console.log(users)
 		socket.broadcast.emit('user_join', {user: data.user})
 	})
 
@@ -98,6 +109,11 @@ io.sockets.on('connection', function (socket) {
 				io.emit("related_tracks", {related_tracks: relatedTracks});
 			}
 		}
+		for(var i = 0; i < users.length; i++){
+			if(users[i].user.email == data.user.email){
+				users[i].hasVoted = true
+			}
+		}
 	})
 	socket.on("nominate", function(data){
 		var exists = false;
@@ -107,6 +123,11 @@ io.sockets.on('connection', function (socket) {
 			}
 		}
 		if(!exists){
+			for(var i = 0; i < users.length; i++){
+				if(users[i].user.email == data.user.email){
+					users[i].hasVoted = true
+				}
+			}
 			var path = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + data.videoId + '&key=AIzaSyCruLojKum0HoBDOYll_gW8D2NPSLVvHZU'	
 			https.get(path, function(res){
 				console.log("@@@@@@@@@@@@@@@")
@@ -136,6 +157,7 @@ io.sockets.on('connection', function (socket) {
 				nextTrack = relatedTracks[i];
 			}
 		}
+
 		currentTrack = nextTrack.videoId
 		relatedTracks = []
 		io.emit("related_tracks", {related_tracks: relatedTracks})
@@ -159,6 +181,11 @@ io.sockets.on('connection', function (socket) {
 			    	}
 			    }
 			    io.emit("related_tracks", {related_tracks: relatedTracks})
+			    for(var i=0; i < users.length; i++){
+			    	users[i].hasVoted = false;
+			    	users[i].hasNominated = false;
+			    }
+			    io.emit("permissions", {hasVoted: false, hasNominated: false})
 
 			});
 		}).on('error', function(e) {

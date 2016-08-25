@@ -7,4 +7,10 @@ app.controller('profileController', ['$scope','userFactory', 'socketFactory','$l
 			$scope.user = data
 		}
 	})
+	$scope.logout = function(){
+		userFactory.logout(function(data){
+			console.log("logged out!")
+			$location.url("/")
+		})
+	}
 }])
