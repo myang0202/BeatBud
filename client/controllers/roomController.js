@@ -21,11 +21,15 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 	console.log("room controller loaded")
 
 	$scope.sendMessage = function () {
-		socketFactory.emit('send_message', {
-			message: $scope.newmessage,
-			user: $scope.user
-		});
-		$scope.newmessage = "";
+		if($scope.newmessage == "/admin reset"){
+			socketFactory.emit("change_track", {user: $scope.user})
+		} else {
+			socketFactory.emit('send_message', {
+				message: $scope.newmessage,
+				user: $scope.user
+			});
+			$scope.newmessage = "";
+		}
 	}
 	socketFactory.on('post_new_message', function (message) {
 		console.log("post messages" ,message)
@@ -59,7 +63,7 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 	    	height: '270',
 		    width: '480',
 	        videoId: currentTrack,
-		    playerVars: { 'autoplay': 1, 'rel': 0, 'start': data.time, 'controls': 0, 'disablekb': 0, 'iv_load_policy': 3,  },
+		    playerVars: { 'autoplay': 1, 'rel': 0, 'start': data.time, 'controls': 0, 'disablekb': 0, 'iv_load_policy': 3, 'origin': 'http://www.youtube.com' },
 		    events: {
 		        'onReady': onPlayerReady,
 		        'onStateChange': onPlayerStateChange

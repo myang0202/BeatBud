@@ -1,4 +1,3 @@
-console.log("directive loaded")
 app.directive('ngScrollBottom', ['$timeout', function ($timeout) {
   return {
     scope: {
@@ -6,7 +5,6 @@ app.directive('ngScrollBottom', ['$timeout', function ($timeout) {
     },
     link: function ($scope, $element, $attr, $ctrl) {
       $scope.$watchCollection('ngScrollBottom', function (newValue) {
-        console.log("IN DIRECTIVE")
         if (newValue) {
           $timeout(function(){
             if($scope.$parent.scrolledToBottom){
