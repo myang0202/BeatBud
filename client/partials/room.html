@@ -1,11 +1,15 @@
-    <div class="header">
-      <img src="/static/img/logo.png" alt="logo">
-      <div class="nav">
-	      <a href="#/dashboard" class="btn btn-link">Dashboard</a>
-	      <a href="#/profile" class="btn btn-link">Profile</a>
-	      <button ng-click="logout()" class="btn btn-link">Logout</button>
-      </div>
-    </div>
+<div class="header">
+  <img src="/static/img/logo.png" alt="logo" style="height: 6em;margin-left: 2em;margin-top: 2em">
+  <div class="nav nav_link">
+      <span class="vert_hr"></span>
+      <a href="#/browse" class="btn btn-link">Browse Rooms</a>
+      <span class="vert_hr"></span>
+      <a href="#/profile" class="btn btn-link">Profile</a>
+      <span class="vert_hr"></span>
+      <button ng-click="logout()" class="btn btn-link">Logout</button>
+  </div>
+</div>
+
 
 <div class="wrapper">
 	<div class="left">
@@ -17,22 +21,31 @@
 					<img ng-src="{{option.thumbnail}}" alt="thumb">
 					<div class="optioninfo">
 						<p>{{option.title}}</p>
-						<button ng-click="vote(option.videoId)" ng-disabled="disableVote" class="btn btn-sm btn-info">Vote</button> 
+						<button ng-click="vote(option.videoId)" ng-disabled="disableVote" class="btn btn-sm btn-info">Vote</button>
 						<span>{{option.votes}}</span>
 					</div>
 				</div>
 			</div>
-			<div class="voteform"><input type="text" ng-model="newvote" ng-pattern="youtubeurl" placeholder=" Youtube URL here"> <button class="btn btn-info" ng-click="nominate()" ng-disabled="disableNominate">Nominate</button></div>
+			<div class="voteform"><input type="text" ng-model="newvote" ng-pattern="youtubeurl" placeholder=" Youtube URL here" data-emoji-input="unicode"> <button class="btn btn-info" ng-click="nominate()" ng-disabled="disableNominate">Nominate</button></div>
 		</div>
 	</div>
 	<div class="chatwindow" >
 		<div class="chatboard" id="chatboard" ng-scroll-bottom="messages">
 			<div ng-repeat="message in messages">
-				<p>{{message.user.first_name}} says: {{message.message}}</p>
+				<p>{{message.user.first_name}}: {{message.message}}</p>
 			</div>
 		</div>
 		<div class="chatinput">
-			<input type="text" ng-model="newmessage" placeholder=" Send a message"> <button ng-click = "sendMessage()" class="btn btn-info">Send</button>
+			<input type="text" ng-model="newmessage" placeholder=" Send a message" data-emojiable="true"> <button ng-click = "sendMessage()" class="btn btn-info" >Send</button>
 		</div>
 	</div>
+  <div class="paststuff" ng-repeat="tracks in previous_tracks">
+    <p>{{tracks.current_track_name}}</p>
+    <img ng-src="{{tracks.thumbnail}}" alt="thumb">
+  </div>
 </div>
+
+
+<footer>
+  <p style="color: #fff;padding: 1em;text-align: right;">beatbud © 2016</p>
+</footer>

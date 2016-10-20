@@ -1,12 +1,21 @@
-1. Backend Log/Reg
+To do list
 
-Given a req.body of {
-	first_name: "example",
-	last_name: "example",
-	email: "example",
-	password: "example"
-}
-Create a new User in database and login that user
-Validations: all fields required, name must be letters only, email must be valid email format, password greater than 8 chars
-Bcrypt password
+1. Allow users to vote to skip current video (majority vote?) (EASY)
+2. Allow users to chat by pressing enter (instead of clicking button overtime) (EASY)
+3. Allow users to control volume and mute (EASY)
+4. Bypass Youtube filters that restrict VEVO, WMG content from playing (IMPORTANT)
+5. Show a list of all users in the room (EASY)
+6. Allow users to create multiple rooms (Need to create UI for new room form and existing room list) (IMPORTANT)
+7. Integrate emojis into chat (NOT IMPORTANT)
+8. Allow users to nominate more than one song (EASY)
+9. Fix bug in deployment where nominated song doesn’t match the link posted (HARD)
+10. Integrate Facebook Login (IMPORTANT)
+11. Improve UX/design on all pages (IMPORTANT)
+12. History of past videos played (IMPORTANT)
+13. Mobile friendly (NOT TOO IMPORTANT)
+14. Search feature for finding new Youtube videos (replace URL linking) (IMPORTANT)
+15. Change Main page to be dashboard
+
+
+
 

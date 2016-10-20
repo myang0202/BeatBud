@@ -1,0 +1,29 @@
+<div class="header">
+  <img src="/static/img/logo.png" alt="logo" style="height: 6em;margin-left: 2em;margin-top: 2em">
+  <div class="nav nav_link">
+      <span class="vert_hr"></span>
+        <a href="#/browse" class="btn btn-link">Browse Rooms</a>
+        <span class="vert_hr"></span>
+        <a href="#/profile" class="btn btn-link">Profile</a>
+        <span class="vert_hr"></span>
+        <button ng-click="logout()" class="btn btn-link">Logout</button>
+  </div>
+</div>
+
+
+
+    <div class="wrapper">
+    	<h1 class="roompreview_h1"><i class="fa fa-cube"></i> Browse the most popular rooms <button ng-click="create()" class="btn btn-info btn-lg roompreview_btn">Or Create a New Room <i class="fa fa-plus-square"></i></button></h1>
+<!--     	<img class="youtubelogo" src="../static/img/playbutton_blue.png" alt="" /> -->
+	<div class="hr2"></div>
+		<div class="roompreview" ng-repeat="room in rooms" ng-click="goToRoom(room.room_name)">
+			
+			<p class="roompreview_text_lg"><img class="roompreview_img" ng-src="{{room.thumbnail}}" alt="thumb"><i class="fa fa-caret-right"></i> {{room.room_name}}</p>
+			<p class="roompreview_text_sm"><i class="fa fa-users"></i> Users watching: {{room.users.length}}</p>
+		</div>
+<!--     	<button class="btn btn-info btn-lg" ng-click="room()">Start Listening Now</button> -->
+    </div>
+
+<footer>
+  <p style="color: #fff;padding: 1em;text-align: right;">beatbud © 2016</p>
+</footer>

@@ -1,5 +1,6 @@
 var users = require('../controllers/users.js');
 var tracks = require('../controllers/tracks.js');
+var rooms = require('../controllers/rooms.js');
 console.log("routes loaded")
 module.exports = function(app) {
 	app.post('/login', users.login);
@@ -12,4 +13,6 @@ module.exports = function(app) {
 	app.get('/loggedinuser', users.loggedInUser);
 	app.get('/track', tracks.getTrack);
 	app.post('/track', tracks.changeTrack);
+	app.get('/rooms', rooms.getRooms);
+	app.post('/rooms', rooms.createRoom);
 }

@@ -1,4 +1,4 @@
-app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trackFactory', '$location', function($scope, userFactory, socketFactory, trackFactory, $location) {
+app.controller('roomController', ['$scope', '$routeParams','userFactory', 'socketFactory', 'trackFactory', '$location', function($scope, $routeParams, userFactory, socketFactory, trackFactory, $location) {
 	// if(!userFactory.loggedIn){
 	// 	$location.url("/");
 	// }
@@ -8,12 +8,14 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 		} else {
 			$scope.user = data
 			socketFactory.emit('new_user', {
-				user: $scope.user
+				user: $scope.user,
+				room_name: $routeParams.room_id
 			})
 	var temp;
 	var player;
 
 	$scope.messages = [];
+	$scope.previous_tracks = [];
 	$scope.disableVote = false;
 	$scope.disableNominate = false;
 	$scope.scrolledToBottom = true;
@@ -22,15 +24,27 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 
 	$scope.sendMessage = function () {
 		if($scope.newmessage == "/admin reset"){
-			socketFactory.emit("change_track", {user: $scope.user})
+			socketFactory.emit("change_track", {user: $scope.user, room_name: $routeParams.room_id})
 		} else {
 			socketFactory.emit('send_message', {
 				message: $scope.newmessage,
-				user: $scope.user
+				user: $scope.user,
+				room_name: $routeParams.room_id
 			});
 			$scope.newmessage = "";
 		}
 	}
+	searchByKeyword = function() {
+		var results = YouTube.Search.list('id,snippet', {q: 'dogs', maxResults: 25});
+
+		console.log("this is results")
+		console.log(results)
+		// for(var i in results.items) {
+		//   var item = results.items[i];
+		// 		  Logger.log('[%s] Title: %s', item.id.videoId, item.snippet.title);
+  	// }
+	}
+	searchByKeyword()
 	socketFactory.on('post_new_message', function (message) {
 		console.log("post messages" ,message)
 		$scope.messages.push(message);
@@ -54,9 +68,11 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 		$scope.disableVote = data.hasVoted
 		$scope.disableNominate = data.hasNominated
 	})
-
-    socketFactory.emit("get_track", {reason: "because I want the track"});
+    socketFactory.emit("get_track", {room_name: $routeParams.room_id});
+		console.log("this is routeParams")
+		console.log($routeParams)
 	socketFactory.on('current_track', function (data){
+		console.log("this is the current track")
     	console.log(data.track);
     	var currentTrack = data.track
     	player = new YT.Player('player', {
@@ -69,29 +85,35 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
 		        'onStateChange': onPlayerStateChange
 		    }
 		});
-		socketFactory.emit("get_related_tracks", {videoId: currentTrack});
+		socketFactory.emit("get_related_tracks", {videoId: currentTrack, room_name: $routeParams.room_id});
 	});
 	socketFactory.on("related_tracks", function(data){
+		console.log("this is related tracks")
 		console.log(data)
 		$scope.voteoptions = data.related_tracks;
 	})
 	socketFactory.on('new_track', function(data){
 		$scope.disableNominate = false;
 		$scope.disableVote = false;
-		currentTrack = data.track
-		console.log(currentTrack)
-		player.loadVideoById(currentTrack);
+		console.log("this is data")
+		console.log(data.track)
+		console.log("this is new track")
+		console.log(data.track.currentTrack)
+		player.loadVideoById(data.track.currentTrack);
+		console.log("this is previous data")
+		console.log(data)
+		$scope.previous_tracks = data.track.pastTracks
 	});
 	$scope.vote = function(id){
 		$scope.disableVote = true;
-		socketFactory.emit("vote", {videoId: id, user: $scope.user});
+		socketFactory.emit("vote", {videoId: id, user: $scope.user, room_name: $routeParams.room_id});
 	}
 	$scope.youtubeurl = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/
 	$scope.nominate = function(){
 		if($scope.youtubeurl.test($scope.newvote)){
 			$scope.disableNominate = true
 			var index = $scope.newvote.indexOf("watch?v=")
-			socketFactory.emit("nominate", {videoId: $scope.newvote.substring(index+8), user: $scope.user})
+			socketFactory.emit("nominate", {videoId: $scope.newvote.substring(index+8), user: $scope.user, room_name: $routeParams.room_id})
 			$scope.newvote = ""
 		}
 	}
@@ -114,7 +136,7 @@ app.controller('roomController', ['$scope','userFactory', 'socketFactory', 'trac
       function onPlayerStateChange(event) {
         console.log(event)
         if(event.data == 0){ //video has stopped
-        	socketFactory.emit("change_track", {user: $scope.user})
+        	socketFactory.emit("change_track", {user: $scope.user, room_name: $routeParams.room_id})
         }
       }
 

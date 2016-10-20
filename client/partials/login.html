@@ -1,13 +1,26 @@
-<div class="header">
-	<img src="/static/img/logo.png" alt="logo">
-</div>
+    <div class="header">
+      <img src="/static/img/logo.png" alt="logo" style="height: 6em;margin-left: 2em;margin-top: 2em">
+      <div class="nav nav_link">
+          <span class="vert_hr"></span>
+          <a href="#/" class="btn btn-link">Home</a>
+          <span class="vert_hr"></span>
+          <a href="#/register" class="btn btn-link">Sign Up</a>
+<!--          <a href="#/profile" class="btn btn-link">Profile</a>
+          <button ng-click="logout()" class="btn btn-link">Logout</button> -->
+      </div>
+    </div>
+
 <div class="wrapper">
 	<div class="login">
 	<h3>Login</h3>
 		<p>Email: <input type="text" ng-model="email"></p>
 		<p>Password: <input type="password" ng-model="password"></p>
 		<p class="error" ng-if="errors">{{errors.message}}</p>
-		<a href="#/register">Register Now</a>
+		<a href="#/register">Sign Up Now</a>
 		<button class="btn btn-default" ng-click="login()">Login</button>
 	</div>
 </div>
+
+<footer>
+  <p style="color: #fff;padding: 1em;text-align: right;">beatbud © 2016</p>
+</footer>

@@ -1,17 +1,29 @@
 <div class="header">
-  <img src="/static/img/logo.png" alt="logo">
-  <div class="nav">
-      <a href="#/dashboard" class="btn btn-link">Dashboard</a>
+  <img src="/static/img/logo.png" alt="logo" style="height: 6em;margin-left: 2em;margin-top: 2em">
+  <div class="nav nav_link">
+      <span class="vert_hr"></span>
+      <a href="#/browse" class="btn btn-link">Browse Rooms</a>
+      <span class="vert_hr"></span>
       <a href="#/profile" class="btn btn-link">Profile</a>
+      <span class="vert_hr"></span>
       <button ng-click="logout()" class="btn btn-link">Logout</button>
   </div>
 </div>
-<div class="profileimg">
-	<img src="../static/img/smoke.jpg" alt="smoke" />
-</div><!--
---><div class="profileinfo">
-    <h2>Profile</h2>
-    <h4>Name : {{user.first_name}}  {{user.last_name}}</h4>
-    <h4>Email : {{user.email}}</h4>
-    <h5>Joined on: {{user.created_at | date : format}}</h5>
-	</div>
+
+<div class="wrapper">
+    <div class="profileimg" >
+      <!-- <img src="../static/img/smoke.jpg" alt="smoke" > -->
+    </div><!--
+    --><div class="profileinfo" style="background-image: url('../static/img/smoke.jpg');">
+        <h1 style="margin: 1em 1em 3em">Profile</h1>
+        <div class="hr2"></div>
+        <h4 style="text-align: right;margin-right: 2.5em">Name : {{user.first_name}}  {{user.last_name}}</h4>
+        <h4 style="text-align: right;margin-right: 2.5em">Email : {{user.email}}</h4>
+        <h4 style="text-align: right;margin-right: 2.5em">Joined on: {{user.created_at | date : format}}</h4>
+        <div class="hr2"></div>
+      </div>
+</div>
+
+<footer>
+  <p style="color: #fff;padding: 1em;text-align: right;">beatbud © 2016</p>
+</footer>
